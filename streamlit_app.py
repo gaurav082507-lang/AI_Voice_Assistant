@@ -13,17 +13,11 @@ from langchain_mistralai import ChatMistralAI
 
 load_dotenv()
 
-<<<<<<< HEAD
 st.set_page_config(
     page_title="AI Voice Assistant",
     page_icon="🎙️",
     layout="wide",
 )
-=======
-st.set_page_config(page_title="AI Voice Assistant", page_icon="🎙️")
-st.title("🎙️ AI Voice Assistant")
-st.caption("Tap record, speak, and the assistant will reply back to you in voice.")
->>>>>>> 4b5b55377347f8a4b92eca48d834e4679692069c
 
 SYSTEM_PROMPT = """You are a helpful, friendly voice assistant. The user is speaking to you, and your responses will be converted to speech, so follow these rules:
 
@@ -36,7 +30,6 @@ SYSTEM_PROMPT = """You are a helpful, friendly voice assistant. The user is spea
 7. If the user's message seems like a transcription with minor errors (from speech-to-text), interpret their intended meaning rather than pointing out the errors."""
 
 
-<<<<<<< HEAD
 # ---------------------------------------------------------------------------
 # Styling
 # ---------------------------------------------------------------------------
@@ -172,8 +165,6 @@ st.markdown(
 )
 
 
-=======
->>>>>>> 4b5b55377347f8a4b92eca48d834e4679692069c
 @st.cache_resource
 def get_chain():
     llm = ChatMistralAI(model="mistral-medium-3-5")
@@ -186,16 +177,12 @@ chain = get_chain()
 if "history" not in st.session_state:
     st.session_state.history = []
 
-<<<<<<< HEAD
 
 # ---------------------------------------------------------------------------
 # Recorder
 # ---------------------------------------------------------------------------
 st.markdown("**Record your message**")
 audio_value = st.audio_input("", label_visibility="collapsed")
-=======
-audio_value = st.audio_input("Record your message")
->>>>>>> 4b5b55377347f8a4b92eca48d834e4679692069c
 
 if audio_value is not None:
     raw_path = None
@@ -215,14 +202,10 @@ if audio_value is not None:
         if not user_text:
             st.warning("Couldn't hear anything clear in that recording. Try again.")
         else:
-<<<<<<< HEAD
             st.markdown(
                 f'<div class="chat-bubble-user"><span class="bubble-label">🧑 You</span>{user_text}</div>',
                 unsafe_allow_html=True,
             )
-=======
-            st.chat_message("user").write(user_text)
->>>>>>> 4b5b55377347f8a4b92eca48d834e4679692069c
 
             with st.spinner("Thinking..."):
                 response = chain.invoke(
@@ -232,14 +215,10 @@ if audio_value is not None:
                     ]
                 )
 
-<<<<<<< HEAD
             st.markdown(
                 f'<div class="chat-bubble-bot"><span class="bubble-label">🤖 Assistant</span>{response}</div>',
                 unsafe_allow_html=True,
             )
-=======
-            st.chat_message("assistant").write(response)
->>>>>>> 4b5b55377347f8a4b92eca48d834e4679692069c
 
             with st.spinner("Generating voice reply..."):
                 reply_audio_path = text_speech(response)
@@ -249,15 +228,11 @@ if audio_value is not None:
             st.session_state.history.append((user_text, response))
 
     finally:
-<<<<<<< HEAD
-=======
         # clean up temp files so they don't pile up between recordings
->>>>>>> 4b5b55377347f8a4b92eca48d834e4679692069c
         for path in (raw_path, wav_path, reply_audio_path):
             if path and os.path.exists(path):
                 os.remove(path)
 
-<<<<<<< HEAD
 
 # ---------------------------------------------------------------------------
 # Conversation history
@@ -288,11 +263,3 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-=======
-if st.session_state.history:
-    st.divider()
-    st.subheader("Conversation history")
-    for user_msg, bot_msg in st.session_state.history:
-        st.markdown(f"**You:** {user_msg}")
-        st.markdown(f"**Assistant:** {bot_msg}")
->>>>>>> 4b5b55377347f8a4b92eca48d834e4679692069c
