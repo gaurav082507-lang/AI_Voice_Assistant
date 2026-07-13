@@ -23,6 +23,7 @@ st.set_page_config(
 st.set_page_config(page_title="AI Voice Assistant", page_icon="🎙️")
 st.title("🎙️ AI Voice Assistant")
 st.caption("Tap record, speak, and the assistant will reply back to you in voice.")
+>>>>>>> 4b5b55377347f8a4b92eca48d834e4679692069c
 
 SYSTEM_PROMPT = """You are a helpful, friendly voice assistant. The user is speaking to you, and your responses will be converted to speech, so follow these rules:
 
