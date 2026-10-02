@@ -9,7 +9,7 @@ from audio_preprocess import audio_preprocess
 from text_to_speech import text_speech
 
 from langchain_core.output_parsers import StrOutputParser
-from langchain_mistralai import ChatMistralAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 
 load_dotenv()
 
@@ -147,7 +147,7 @@ with st.sidebar:
     st.markdown("**WHAT IT DOES**")
     st.markdown('<div class="sidebar-card">🎧 In-browser voice recording</div>', unsafe_allow_html=True)
     st.markdown('<div class="sidebar-card">📝 Whisper speech-to-text</div>', unsafe_allow_html=True)
-    st.markdown('<div class="sidebar-card">🧠 Mistral AI reasoning</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sidebar-card">🧠 Gemini AI reasoning</div>', unsafe_allow_html=True)
     st.markdown('<div class="sidebar-card">🔊 Piper text-to-speech reply</div>', unsafe_allow_html=True)
 
     st.markdown("**HOW TO USE**")
@@ -166,7 +166,7 @@ st.markdown(
         <p>Tap record, speak, and the assistant will reply back to you in voice.</p>
         <div class="pill-row">
             <span class="pill">🎧 Whisper STT</span>
-            <span class="pill">🧠 Mistral AI</span>
+            <span class="pill">🧠 Gemini AI</span>
             <span class="pill">🔊 Piper TTS</span>
         </div>
     </div>
@@ -177,7 +177,7 @@ st.markdown(
 
 @st.cache_resource
 def get_chain():
-    llm = ChatMistralAI(model="mistral-medium-3-5")
+    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
     parser = StrOutputParser()
     return llm | parser
 
