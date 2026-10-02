@@ -177,7 +177,7 @@ st.markdown(
 
 @st.cache_resource
 def get_chain():
-    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
+    llm = ChatGoogleGenerativeAI(model="gemini-3.5-flash-lite")
     parser = StrOutputParser()
     return llm | parser
 
